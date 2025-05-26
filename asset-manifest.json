@@ -1,0 +1,15 @@
+{
+  "files": {
+    "main.css": "/Cipher-spry/static/css/main.d9211ab1.css",
+    "main.js": "/Cipher-spry/static/js/main.5b8798b8.js",
+    "static/js/453.dc73245c.chunk.js": "/Cipher-spry/static/js/453.dc73245c.chunk.js",
+    "index.html": "/Cipher-spry/index.html",
+    "main.d9211ab1.css.map": "/Cipher-spry/static/css/main.d9211ab1.css.map",
+    "main.5b8798b8.js.map": "/Cipher-spry/static/js/main.5b8798b8.js.map",
+    "453.dc73245c.chunk.js.map": "/Cipher-spry/static/js/453.dc73245c.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.d9211ab1.css",
+    "static/js/main.5b8798b8.js"
+  ]
+}
