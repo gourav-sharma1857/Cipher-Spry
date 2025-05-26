@@ -3,7 +3,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './App.css'; // Make sure this line is present and your CSS is in App.css
 
-const API_URL = 'http://127.0.0.1:8000/get_patterned_word';
+const API_URL = "https://cipher-spry-backend-1.onrender.com/get_patterned_word";
 
 const HINTS_MAP = {
       "alternating_shift_2_minus_2": "It's a dance of 'two steps forward, two steps back!' Check the rhythm of the letters.",
