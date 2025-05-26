@@ -1,0 +1,422 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Fredoka:wght@400;600&family=Quicksand:wght@400;700&display=swap');
+
+/* --- General Styles --- */
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #0056b3;
+  --accent-color: #28a745;
+  --background-light: #f8f9fa;
+  --text-dark: #212529;
+  --text-light: #ffffff;
+  --success-color: #28a745;
+  --warning-color: #dc3545;
+  --box-bg: #e9ecef;
+  --box-border: #dee2e6;
+  --correct-color: #28a745;
+  --present-color: #ffc107;
+  --absent-color: #6c757d;
+  --input-bg: #ffffff;
+}
+
+body {
+  margin: 0;
+  font-family: 'Quicksand', sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  background-color: var(--background-light);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* --- Game Container --- */
+.game-container {
+  background-color: var(--text-light);
+  border-radius: 15px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+  padding: 40px;
+  text-align: center;
+  max-width: 500px;
+  width: 100%;
+  box-sizing: border-box;
+  position: relative;
+}
+
+.game-title {
+  font-family: 'Fredoka', cursive;
+  color: var(--primary-color);
+  font-size: 2.8em;
+  margin-bottom: 30px;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.05);
+}
+
+/* --- Level Select Buttons --- */
+.level-select {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.level-select button {
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  border: none;
+  border-radius: 10px;
+  padding: 15px 30px;
+  font-size: 1.2em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.level-select button:hover {
+  background-color: var(--secondary-color);
+  transform: translateY(-2px);
+}
+
+.level-select button:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* --- Sequence & Answer Boxes --- */
+.sequence-display,
+.answer-boxes {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 25px;
+  height: 60px;
+  position: relative;
+}
+
+.answer-boxes {
+    cursor: text;
+    margin-top: 25px;
+}
+
+.answer-box {
+  width: 50px;
+  height: 50px;
+  background-color: var(--box-bg);
+  border: 2px solid var(--box-border);
+  border-radius: 8px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2em;
+  font-weight: 700;
+  color: var(--text-dark);
+  text-transform: uppercase;
+  transition: background-color 0.3s ease, border-color 0.3s ease, color 0.3s ease;
+}
+
+/* Specific colors for correctness feedback */
+.answer-box.correct {
+  background-color: var(--correct-color);
+  border-color: var(--correct-color);
+  color: var(--text-light);
+}
+
+.answer-box.present {
+  background-color: var(--present-color);
+  border-color: var(--present-color);
+  color: var(--text-light);
+}
+
+.answer-box.absent {
+  background-color: var(--absent-color);
+  border-color: var(--absent-color);
+  color: var(--text-light);
+}
+
+/* --- Answer Input --- */
+.answer-input {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: text;
+  caret-color: transparent;
+  z-index: 10;
+}
+
+/* --- Timer Display --- */
+.timer-display {
+  font-size: 1.6em;
+  font-weight: 700;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+  position: absolute;
+  top: 15px;
+  right: 25px;
+  background-color: var(--background-light);
+  padding: 5px 10px;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+
+/* --- Buttons (Submit, New Sequence, Back, Hint) --- */
+.game-buttons {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.submit-button,
+.new-sequence-button,
+.back-button,
+.hint-button,
+.alphabet-reference-button,
+.reveal-answer-button
+{
+  background-color: var(--primary-color);
+  color: var(--text-light);
+  border: none;
+  border-radius: 8px;
+  padding: 12px 25px;
+  font-size: 1.1em;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1);
+  flex-grow: 1;
+  min-width: 150px;
+  max-width: 220px;
+}
+
+/* Hover/Active for all generic buttons */
+.submit-button:hover:not(:disabled),
+.new-sequence-button:hover:not(:disabled),
+.back-button:hover:not(:disabled),
+.hint-button:hover:not(:disabled),
+.alphabet-reference-button:hover:not(:disabled),
+.reveal-answer-button:hover:not(:disabled)
+{
+  background-color: var(--secondary-color);
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.15);
+}
+
+.submit-button:active:not(:disabled),
+.new-sequence-button:active:not(:disabled),
+.back-button:active:not(:disabled),
+.hint-button:active:not(:disabled),
+.alphabet-reference-button:active:not(:disabled),
+.reveal-answer-button:active:not(:disabled)
+{
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Disabled state for all buttons */
+.submit-button:disabled,
+.hint-button:disabled,
+.reveal-answer-button:disabled {
+  background-color: var(--box-border);
+  cursor: not-allowed;
+  opacity: 0.7;
+  transform: none;
+  box-shadow: none;
+}
+
+
+/* Specific button colors for clarity */
+.submit-button {
+  background-color: var(--correct-color);
+}
+.submit-button:hover:not(:disabled) {
+    background-color: #218838;
+}
+
+.hint-button {
+  background-color: var(--present-color);
+  color: var(--text-dark);
+}
+.hint-button:hover:not(:disabled) {
+    background-color: #e0a800;
+}
+.back-button {
+    background-color: var(--absent-color);
+}
+.back-button:hover:not(:disabled) {
+    background-color: #5a6268;
+}
+
+/* --- Reveal Answer Button --- */
+.reveal-answer-button {
+    background-color: var(--warning-color);
+    color: var(--text-light);
+}
+
+.reveal-answer-button:hover:not(:disabled) {
+    background-color: #c82333;
+}
+
+/* --- Alphabet Reference Button --- */
+.alphabet-reference-button {
+    background-color: #17a2b8;
+    color: var(--text-light);
+}
+
+.alphabet-reference-button:hover:not(:disabled) {
+    background-color: #138496;
+}
+
+
+/* --- Feedback & Score --- */
+.feedback-message {
+  margin: 20px 0;
+  font-size: 1.1em;
+  font-weight: 600;
+  color: var(--primary-color);
+  min-height: 25px;
+}
+
+.score-display {
+  font-size: 1.5em;
+  font-weight: 700;
+  color: var(--accent-color);
+  margin-bottom: 20px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+/* --- Hint Message --- */
+.hint-message {
+  margin-top: 20px;
+  padding: 15px;
+  border: 2px dashed var(--present-color);
+  background-color: #fffde7;
+  color: var(--text-dark);
+  font-style: italic;
+  border-radius: 10px;
+  text-align: center;
+  font-size: 1em;
+  line-height: 1.5;
+  box-shadow: inset 0 0 5px rgba(0, 0, 0, 0.05);
+}
+
+/* --- Answer Box when Revealed --- */
+.answer-box.revealed {
+  background-color: #ffc107;
+  border-color: #ffc107;
+  color: var(--text-dark);
+  animation: revealedFadeIn 0.5s ease-out forwards;
+}
+
+/* Optional: Add a subtle animation when answer is revealed */
+@keyframes revealedFadeIn {
+    from { opacity: 0; transform: translateY(-5px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* --- Alphabet Reference Container --- */
+.alphabet-reference-container {
+    margin-top: 30px;
+    background-color: var(--background-light);
+    border: 1px solid var(--box-border);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.05);
+}
+
+.alphabet-reference-container h3 {
+    color: var(--primary-color);
+    font-size: 1.4em;
+    margin-bottom: 20px;
+    font-family: 'Fredoka', cursive;
+}
+
+.alphabet-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(60px, 1fr));
+    gap: 10px;
+    justify-items: center;
+}
+
+.alphabet-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 5px;
+    border-radius: 5px;
+    background-color: var(--text-light);
+    border: 1px solid var(--box-bg);
+    width: 50px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+}
+
+.alphabet-char {
+    font-size: 1.3em;
+    font-weight: 700;
+    color: var(--text-dark);
+}
+
+.alphabet-value {
+    font-size: 0.9em;
+    color: var(--absent-color);
+}
+
+
+/* --- Responsive Adjustments --- */
+@media (max-width: 600px) {
+  .game-container {
+    padding: 25px;
+    margin: 10px;
+  }
+
+  .game-title {
+    font-size: 2.2em;
+    margin-bottom: 20px;
+  }
+
+  .level-select {
+    flex-direction: column;
+    gap: 15px;
+  }
+
+  .level-select button {
+    padding: 12px 25px;
+    font-size: 1.1em;
+  }
+
+  .answer-box {
+    width: 45px;
+    height: 45px;
+    font-size: 1.8em;
+  }
+
+  .game-buttons button {
+    padding: 10px 20px;
+    font-size: 1em;
+    min-width: unset;
+    max-width: unset;
+    flex-grow: 1;
+  }
+
+  .alphabet-grid {
+    grid-template-columns: repeat(auto-fit, minmax(45px, 1fr));
+    gap: 5px;
+  }
+  .alphabet-item {
+    width: 40px;
+  }
+  .alphabet-char {
+    font-size: 1.1em;
+  }
+  .alphabet-value {
+    font-size: 0.8em;
+  }
+}
